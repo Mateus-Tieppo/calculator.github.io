@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="foto calculadora">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .fundo {
+            background-image: linear-gradient(45deg, black, crimson);
+            height: 100vh;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .calculadora {
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .calculadora h1 {
+            margin-bottom: 10px;
+        }
+        table {
+            margin: 0 auto;
+        }
+        button {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            margin: 3px;
+            cursor: pointer;
+            background-color: crimson;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:active {
+            background-color: darkred;
+        }
+        #resultado {
+            background-color: white;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 45px;
+            min-height: 50px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="fundo">
+        <div class="calculadora">
+            <h1>Calculator</h1>
+            <p id="resultado">0</p>
+            <table>
+                <tr>
+                    <td><button onclick="clearDisplay()">C</button></td>
+                    <td><button onclick="backspace()"><</button></td>
+                    <td><button onclick="insert('/')">/</button></td>
+                    <td><button onclick="insert('*')">X</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="insert('7')">7</button></td>
+                    <td><button onclick="insert('8')">8</button></td>
+                    <td><button onclick="insert('9')">9</button></td>
+                    <td><button onclick="insert('-')">-</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="insert('4')">4</button></td>
+                    <td><button onclick="insert('5')">5</button></td>
+                    <td><button onclick="insert('6')">6</button></td>
+                    <td><button onclick="insert('+')">+</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="insert('1')">1</button></td>
+                    <td><button onclick="insert('2')">2</button></td>
+                    <td><button onclick="insert('3')">3</button></td>
+                    <td rowspan="2"><button style="height: 106px;" onclick="calculate()">=</button></td>
+                </tr>
+                <tr>
+                    <td><button onclick="insert('.')">.</button></td>
+                    <td colspan="2"><button onclick="insert('0')" style="width: 106px;">0</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function insert(num) {
+            var current = document.getElementById('resultado').innerHTML;
+            if (current === "0") {
+                document.getElementById('resultado').innerHTML = num;
+            } else {
+                document.getElementById('resultado').innerHTML = current + num;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById('resultado').innerHTML = "0";
+        }
+
+        function backspace() {
+            var current = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = current.substring(0, current.length - 1);
+            if (document.getElementById('resultado').innerHTML === "") {
+                document.getElementById('resultado').innerHTML = "0";
+            }
+        }
+
+        function calculate() {
+            var result = document.getElementById('resultado').innerHTML;
+            document.getElementById('resultado').innerHTML = eval(result.replace('X', '*'));
+        }
+    </script>
+</body>
+</html>
